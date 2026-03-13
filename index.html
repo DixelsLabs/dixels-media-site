@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dixels Media</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(0, 102, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(0, 60, 180, 0.18), transparent 35%),
+        linear-gradient(180deg, #06111f 0%, #081a33 55%, #0b1f3d 100%);
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 15, 30, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    .logo span {
+      color: #4da3ff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #dce9ff;
+      font-size: 0.95rem;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #4da3ff;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(6, 17, 31, 0.65), rgba(6, 17, 31, 0.78)),
+        url("background.jpg") center center / cover no-repeat;
+      background-attachment: fixed;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content-panel {
+      padding: 34px;
+      border-radius: 26px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.04)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.28),
+        0 0 30px rgba(77, 163, 255, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(77, 163, 255, 0.35);
+      border-radius: 999px;
+      background: rgba(77, 163, 255, 0.08);
+      color: #9dcbff;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #4da3ff;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: #d7e5ff;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #178bff, #005eff);
+      color: white;
+      box-shadow: 0 10px 30px rgba(0, 94, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      padding: 16px 20px;
+      min-width: 140px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .stat h3 {
+      font-size: 1.4rem;
+      color: #4da3ff;
+      margin-bottom: 4px;
+    }
+
+    .stat p {
+      font-size: 0.9rem;
+      margin: 0;
+      color: #dce9ff;
+    }
+
+    .hero-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.13),
+        rgba(255,255,255,0.05)
+      );
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.35),
+        0 0 30px rgba(23, 139, 255, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transform: perspective(1200px) rotateY(-6deg) rotateX(3deg);
+      transition: 0.35s ease;
+    }
+
+    .hero-card:hover {
+      transform: perspective(1200px) rotateY(-2deg) rotateX(1deg) translateY(-6px);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.5rem;
+    }
+
+    .hero-card p {
+      margin-bottom: 16px;
+      color: #d7e5ff;
+    }
+
+    .hero-card ul {
+      list-style: none;
+    }
+
+    .hero-card li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: #eaf3ff;
+    }
+
+    .hero-card li:last-child {
+      border-bottom: none;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 45px;
+    }
+
+    .section-header h2 {
+      font-size: 2.3rem;
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      color: #c8daff;
+      font-size: 1rem;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      border-radius: 22px;
+      padding: 28px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(77, 163, 255, 0.35);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+    }
+
+    .card h3 {
+      margin-bottom: 14px;
+      color: #7ebeff;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: #d8e6ff;
+    }
+
+    .mission-box {
+      max-width: 700px;
+      margin: auto;
+      padding: 36px;
+      border-radius: 24px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(23,139,255,0.16), rgba(0,94,255,0.08));
+      border: 1px solid rgba(77,163,255,0.35);
+      box-shadow:
+        0 0 0 1px rgba(77,163,255,0.18),
+        0 0 18px rgba(77,163,255,0.18),
+        0 0 35px rgba(0,94,255,0.12),
+        0 20px 50px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .mission-box p {
+      font-size: 1.12rem;
+      color: #eef5ff;
+      margin: 0;
+    }
+
+    #reviews,
+    #socials {
+      position: relative;
+      padding: 140px 0 160px;
+      background:
+        linear-gradient(rgba(4, 15, 38, 0.45), rgba(4, 15, 38, 0.55)),
+        url("background.jpg") center center / cover no-repeat;
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+
+    #reviews::before,
+    #socials::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 10, 35, 0.18);
+      z-index: 1;
+    }
+
+    #reviews .container,
+    #socials .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    #reviews .section-header,
+    #socials .section-header {
+      margin-bottom: 38px;
+    }
+
+    .reviews-frame,
+    .social-frame {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px;
+      border: 4px solid rgba(255, 255, 255, 0.85);
+      background: rgba(0, 20, 70, 0.78);
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.28),
+        0 0 28px rgba(77, 163, 255, 0.10);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .review-card {
+      padding: 26px;
+      border-radius: 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .stars {
+      color: #7ebeff;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .review-card p {
+      color: #dce9ff;
+      margin-bottom: 18px;
+    }
+
+    .review-name {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .faq-list {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .faq-item {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 20px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 22px 22px;
+      color: #dce9ff;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .social-box {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 42px 36px;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .social-buttons a {
+      padding: 14px 22px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      background: linear-gradient(135deg, #178bff, #005eff);
+      box-shadow: 0 10px 24px rgba(0,94,255,0.28);
+      transition: 0.3s ease;
+    }
+
+    .social-buttons a:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      padding: 30px 0;
+      text-align: center;
+      color: #aac7f1;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 0;
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid,
+      .cards-3,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .reviews-frame,
+      .social-frame {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero,
+      #reviews,
+      #socials {
+        background-attachment: scroll;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 80px 0 60px;
+      }
+
+      #reviews,
+      #socials {
+        padding: 90px 0 110px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="logo">Dixels <span>Media</span></div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#mission">Mission</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#socials">Socials</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content-panel">
+        <div class="eyebrow">Digital Growth for Canadian Small Businesses</div>
+        <h1>Helping Small Businesses in <span>Canada</span> Thrive Online</h1>
+        <p>
+          Dixels Media helps small businesses in Canada grow through social media
+          management, social media growth, and paid advertising with a modern,
+          strategy-first approach built for visibility and results.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#services" class="btn btn-primary">Explore Services</a>
+          <a href="#socials" class="btn btn-secondary">Follow Our Socials</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <h3>3 Core</h3>
+            <p>Growth Services</p>
+          </div>
+          <div class="stat">
+            <h3>Canada</h3>
+            <p>Small Business Focus</p>
+          </div>
+          <div class="stat">
+            <h3>Modern</h3>
+            <p>Tech-Style Branding</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>What We Focus On</h3>
+        <p>A sharper digital presence designed to help your business stand out.</p>
+        <ul>
+          <li>Social Media Management</li>
+          <li>Social Media Growth</li>
+          <li>Paid Advertising</li>
+          <li>Brand Visibility</li>
+          <li>Customer Attraction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>
+          We provide growth-focused digital services designed to help small
+          businesses in Canada build their brand, reach more people, and generate real momentum online.
+        </p>
+      </div>
+
+      <div class="cards-3">
+        <div class="card" style="transition-delay: 0.1s;">
+          <h3>Social Media Management</h3>
+          <p>
+            We manage your social media presence with strategic content, branding,
+            and consistency so your business looks active, professional, and trustworthy.
+          </p>
+        </div>
+
+        <div class="card" style="transition-delay: 0.3s;">
+          <h3>Social Media Growth</h3>
+          <p>
+            We help expand your reach and audience with proven growth strategies
+            that improve visibility, engagement, and brand awareness.
+          </p>
+        </div>
+
+        <div class="card" style="transition-delay: 0.5s;">
+          <h3>Paid Advertising</h3>
+          <p>
+            We create and manage ad campaigns that help your business reach the
+            right people, generate leads, and produce measurable results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Mission</h2>
+      </div>
+      <div class="mission-box">
+        <p>
+          Our mission is to help small businesses in Canada thrive by building a
+          stronger online presence through strategic social media management,
+          audience growth, and paid advertising.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2>Client Reviews</h2>
+       
+      </div>
+
+      <div class="reviews-frame">
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              Dixels Media helped us improve our online presence and made our page
+              look much more professional. Great communication and support throughout.
+            </p>
+            <div class="review-name">Adam</div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              We saw better engagement and a clearer strategy after working with
+              Dixels Media. They really understood what our business needed.
+            </p>
+            <div class="review-name">Dianne</div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              Professional, responsive, and easy to work with. Dixels Media gave
+              our business a stronger digital presence and clearer direction.
+            </p>
+            <div class="review-name">Jess</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+      
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">What services does Dixels Media offer?</button>
+          <div class="faq-answer">
+            We offer social media management, social media growth, and paid advertising services for small businesses in Canada.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Who do you work with?</button>
+          <div class="faq-answer">
+            We primarily help small businesses in Canada that want to improve their online presence, grow their audience, and attract more customers.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Do you create custom strategies for each business?</button>
+          <div class="faq-answer">
+            Yes. Every business is different, so we tailor our approach based on your goals, audience, and the platforms that matter most for your brand.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">How do I get started?</button>
+          <div class="faq-answer">
+            You can start by contacting us through our social media pages, by adding your booking link to this page, or by simply sending us an email.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="socials">
+    <div class="container">
+      <div class="section-header">
+        <h2>Connect With Us</h2>
+        <p>
+          Follow Dixels Media on social media to stay updated and learn more about what we do.
+        </p>
+      </div>
+
+      <div class="social-frame">
+        <div class="social-box">
+          <p>Click below to visit our official pages.</p>
+          <div class="social-buttons">
+            <a href="https://www.facebook.com/profile.php?id=100092414868311" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/dixelsmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="mailto:dixelsmedia@gmail.com">Email Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="container">
+      <p>© 2026 Dixels Media. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.faq-question');
+
+      button.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>
