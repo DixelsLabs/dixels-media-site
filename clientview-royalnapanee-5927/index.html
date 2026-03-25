@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Royal Napanee Inn</title>
@@ -16,9 +15,11 @@
       background: #eef6f0;
       color: #183126;
       line-height: 1.6;
+      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
+    iframe { max-width: 100%; }
     .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
     .nav-wrap {
@@ -35,6 +36,10 @@
       justify-content: space-between;
       gap: 20px;
       padding: 16px 0;
+    }
+    .brand {
+      min-width: 0;
+      flex: 1;
     }
     .brand h1 {
       margin: 0;
@@ -54,6 +59,8 @@
       gap: 26px;
       color: rgba(255,255,255,0.9);
       font-size: 0.95rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
     .nav-links a:hover { color: #dff2e4; }
 
@@ -65,6 +72,7 @@
       font-weight: 700;
       transition: 0.28s ease;
       font-size: 0.96rem;
+      text-align: center;
     }
     .btn-primary, .btn-secondary, .btn-green {
       background: linear-gradient(135deg, #4d8b66, #2f6b4f);
@@ -159,6 +167,8 @@
       backdrop-filter: blur(14px);
       padding: 28px;
       box-shadow: 0 24px 60px rgba(0,0,0,0.16);
+      width: 100%;
+      min-width: 0;
     }
     .booking-card h3 {
       margin: 0 0 18px;
@@ -175,24 +185,34 @@
       margin-bottom: 14px;
     }
     .field label { display: block; font-size: 0.88rem; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
-    .field input, .field select {
+    .field input, .field select, .field textarea {
       width: 100%;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.12);
       color: #fff;
       border-radius: 14px;
       padding: 14px 16px;
-      font-size: 0.98rem;
+      font-size: 16px;
       appearance: auto;
       -webkit-appearance: auto;
       -moz-appearance: auto;
       overflow: visible;
+      min-width: 0;
     }
     .field select option {
       color: #183126;
       background: #ffffff;
     }
-    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .date-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
 
     section { padding: 38px 0; }
     .section-head { margin-bottom: 22px; }
@@ -214,6 +234,7 @@
       padding: 22px;
       box-shadow: 0 10px 28px rgba(28, 63, 45, 0.08);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
+      min-width: 0;
     }
     .card:hover, .panel:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(28, 63, 45, 0.1); }
     .two-col { display: grid; grid-template-columns: 1.16fr 0.84fr; gap: 24px; }
@@ -229,12 +250,24 @@
     .place-item { display: flex; justify-content: space-between; align-items: start; gap: 14px; }
     .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .room-card {
-      overflow: hidden; border-radius: 28px; background: #f9fcfa; border: 1px solid #d7e6db; box-shadow: 0 10px 28px rgba(28, 63, 45, 0.08); transition: transform 0.35s ease, box-shadow 0.35s ease;
+      overflow: hidden;
+      border-radius: 28px;
+      background: #f9fcfa;
+      border: 1px solid #d7e6db;
+      box-shadow: 0 10px 28px rgba(28, 63, 45, 0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      min-width: 0;
     }
     .room-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(28, 63, 45, 0.12); }
     .room-card img { height: 260px; width: 100%; object-fit: cover; }
     .room-content { padding: 22px; }
-    .room-top { display: flex; justify-content: space-between; gap: 14px; align-items: start; }
+    .room-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
     .pill { padding: 7px 12px; background: #e3efe6; border-radius: 999px; font-size: 0.85rem; color: #2f6b4f; white-space: nowrap; font-weight: 700; }
     .amenities-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -294,6 +327,11 @@
       background: rgba(255,255,255,0.75);
       border: 1px solid rgba(0,0,0,0.08);
     }
+    .explore-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
     @keyframes roomScroll {
       0%, 28% { transform: translateX(0); }
       33%, 61% { transform: translateX(-33.3333%); }
@@ -316,19 +354,217 @@
       flex-wrap: wrap;
     }
     .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
-    @media (max-width: 1050px) {
-      .hero-grid, .two-col, .rooms-grid, .contact-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .stats { max-width: 100%; }
+
+    @media (max-width: 1200px) {
+      .explore-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .two-col,
+      .rooms-grid,
+      .contact-grid,
+      .contact .two-col,
+      #location-feature .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav .btn {
+        width: auto;
+      }
+
+      .stats {
+        max-width: 100%;
+      }
+
+      .hero-grid {
+        min-height: auto;
+        padding: 36px 0 56px;
+      }
+    }
+
     @media (max-width: 720px) {
-      .container { width: min(100% - 24px, 1180px); }
-      .stats, .field-grid, .amenities-grid { grid-template-columns: 1fr; }
-      .brand h1 { font-size: 1.65rem; }
-      .hero-copy h2 { font-size: 2.5rem; }
-      .booking-card, .card, .panel { padding: 22px; }
-      .place-item { flex-direction: column; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .container,
+      .footer-inner {
+        width: min(100% - 24px, 1180px);
+      }
+
+      section {
+        padding: 26px 0;
+      }
+
+      .nav {
+        gap: 14px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        flex: 1 1 100%;
+      }
+
+      .brand h1 {
+        font-size: 1.45rem;
+      }
+
+      .brand p {
+        letter-spacing: 0.14em;
+        font-size: 0.64rem;
+      }
+
+      .nav > .btn {
+        width: 100%;
+        padding: 13px 18px;
+      }
+
+      .hero-grid {
+        gap: 24px;
+        padding: 28px 0 42px;
+      }
+
+      .hero-copy {
+        text-align: left;
+      }
+
+      .eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        padding: 8px 12px;
+      }
+
+      .hero-copy h2 {
+        font-size: clamp(2rem, 10vw, 2.7rem);
+        line-height: 1.08;
+      }
+
+      .hero-copy p {
+        font-size: 0.98rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn,
+      .book-cta,
+      #contact .btn,
+      .room-content .btn {
+        width: 100%;
+      }
+
+      .stats,
+      .field-grid,
+      .amenities-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .date-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .date-grid .field {
+        margin-bottom: 0;
+      }
+
+      .stat {
+        min-height: auto;
+        padding: 18px 20px;
+      }
+
+      .booking-card,
+      .card,
+      .panel,
+      .room-content {
+        padding: 18px;
+      }
+
+      .room-card img,
+      .room-slides img {
+        height: 220px;
+      }
+
+      .place-item,
+      .room-top,
+      .footer-inner,
+      #contact .two-col {
+        flex-direction: column;
+      }
+
+      iframe {
+        height: 320px !important;
+      }
+
+      .section-head h3 {
+        font-size: 1.45rem;
+        line-height: 1.2;
+      }
+
+      .faq-item summary {
+        padding-right: 28px;
+      }
+
+      .explore-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+      }
+
+      .explore-grid .room-card {
+        min-width: 100%;
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+      }
+
+      .explore-grid::-webkit-scrollbar {
+        height: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        line-height: 1.5;
+      }
+
+      .container,
+      .footer-inner {
+        width: calc(100% - 20px);
+      }
+
+      .hero-copy h2 {
+        font-size: 1.85rem;
+      }
+
+      .hero-copy p,
+      .section-head p,
+      .muted,
+      .check-item,
+      .amenity,
+      .faq-item p {
+        font-size: 0.95rem;
+      }
+
+      .btn, button {
+        font-size: 0.94rem;
+        padding: 13px 18px;
+      }
+
+      .room-card img,
+      .room-slides img {
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -355,7 +591,7 @@
     <div class="container hero-inner">
       <div class="hero-grid">
         <div class="hero-copy fade-up">
-          <span class="eyebrow">Simple stays •  comfort • Easy access</span>
+          <span class="eyebrow">Simple stays • comfort • Easy access</span>
           <h2>Welcome to Royal Napanee Inn.</h2>
           <p>
             Enjoy a simple and comfortable stay in Napanee with free parking, free WiFi, air-conditioned rooms, convenient access to nearby shops and attractions, and room options with kitchenettes for added comfort.
@@ -372,13 +608,15 @@
 
         <div id="booking" class="booking-card fade-up delay-1">
           <h3>Reserve now</h3>
-          <div class="field">
-            <label>Check-in</label>
-            <input type="date" />
-          </div>
-          <div class="field">
-            <label>Check-out</label>
-            <input type="date" />
+          <div class="date-grid">
+            <div class="field">
+              <label>Check-in</label>
+              <input type="date" />
+            </div>
+            <div class="field">
+              <label>Check-out</label>
+              <input type="date" />
+            </div>
           </div>
           <div class="field-grid">
             <div class="field">
@@ -497,7 +735,7 @@
             Explore local attractions, scenic spots, golfing options, fishing access, dining, and convenient places to visit during your stay.
           </p>
         </div>
-        <div class="rooms-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="explore-grid">
           <article class="room-card">
             <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1000&q=80" alt="Downtown Napanee" />
             <div class="room-content">
