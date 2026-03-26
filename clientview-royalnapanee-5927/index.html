@@ -398,26 +398,7 @@
         position: relative;
       }
 
-      .explore-next {
-        display: flex;
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        background: rgba(249,252,250,0.92);
-        color: #2f6b4f;
-        font-size: 1.4rem;
-        font-weight: 700;
-        box-shadow: 0 8px 20px rgba(28, 63, 45, 0.12);
-        border: 0;
-        z-index: 3;
-      }
-
+      
       .explore-swipe-hint {
         display: block;
         position: absolute;
@@ -594,9 +575,7 @@
         position: relative;
       }
 
-      .explore-next {
-        display: none;
-      }
+      
 
       .explore-grid::-webkit-scrollbar {
         height: 8px;
@@ -837,8 +816,7 @@
         </div>
         <div class="explore-scroll-wrap">
           <span class="explore-swipe-hint">Swipe</span>
-          <button class="explore-next" type="button" aria-label="Scroll to next attraction">→</button>
-          <div class="explore-grid" aria-label="Swipe through nearby attractions">
+                    <div class="explore-grid" aria-label="Swipe through nearby attractions">
           <article class="room-card">
             <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1000&q=80" alt="Downtown Napanee" />
             <div class="room-content">
@@ -1061,19 +1039,5 @@
       </div>
     </div>
   </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var nextBtn = document.querySelector('.explore-next');
-      var grid = document.querySelector('.explore-grid');
-
-      if (nextBtn && grid) {
-        nextBtn.addEventListener('click', function () {
-          var card = grid.querySelector('.room-card');
-          var scrollAmount = card ? card.offsetWidth + 16 : grid.clientWidth;
-          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
 </body>
 </html>
