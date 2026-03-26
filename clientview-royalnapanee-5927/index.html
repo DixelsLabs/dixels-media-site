@@ -553,15 +553,39 @@
       }
 
       .explore-grid::after {
-        content: "";
+        content: "→";
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 48px;
-        height: calc(100% - 6px);
-        background: linear-gradient(to left, #f9fcfa 10%, rgba(249,252,250,0));
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(249,252,250,0.92);
+        color: #2f6b4f;
+        font-size: 1.4rem;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(28, 63, 45, 0.12);
         pointer-events: none;
-        z-index: 2;
+        z-index: 3;
+      }
+
+      .explore-grid::before {
+        content: "Swipe";
+        position: absolute;
+        top: 14px;
+        right: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(47,107,79,0.88);
+        color: #fff;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        pointer-events: none;
+        z-index: 3;
       }
 
       .explore-grid::-webkit-scrollbar {
