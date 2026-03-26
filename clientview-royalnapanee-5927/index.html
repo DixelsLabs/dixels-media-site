@@ -394,6 +394,44 @@
     }
 
     @media (max-width: 720px) {
+      .explore-scroll-wrap {
+        position: relative;
+      }
+
+      .explore-next {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(249,252,250,0.92);
+        color: #2f6b4f;
+        font-size: 1.4rem;
+        font-weight: 700;
+        box-shadow: 0 8px 20px rgba(28, 63, 45, 0.12);
+        border: 0;
+        z-index: 3;
+      }
+
+      .explore-swipe-hint {
+        display: block;
+        position: absolute;
+        top: 14px;
+        right: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(47,107,79,0.88);
+        color: #fff;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        z-index: 3;
+        pointer-events: none;
+      }
       .container,
       .footer-inner {
         width: min(100% - 24px, 1180px);
@@ -552,40 +590,12 @@
         scroll-snap-align: start;
       }
 
-      .explore-grid::after {
-        content: "→";
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        background: rgba(249,252,250,0.92);
-        color: #2f6b4f;
-        font-size: 1.4rem;
-        font-weight: 700;
-        box-shadow: 0 8px 20px rgba(28, 63, 45, 0.12);
-        pointer-events: none;
-        z-index: 3;
+      .explore-scroll-wrap {
+        position: relative;
       }
 
-      .explore-grid::before {
-        content: "Swipe";
-        position: absolute;
-        top: 14px;
-        right: 12px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(47,107,79,0.88);
-        color: #fff;
-        font-size: 0.72rem;
-        letter-spacing: 0.04em;
-        pointer-events: none;
-        z-index: 3;
+      .explore-next {
+        display: none;
       }
 
       .explore-grid::-webkit-scrollbar {
@@ -753,6 +763,7 @@
             <div class="check-item" style="animation: fadeUp 0.8s ease both; animation-delay: 0.48s;"><span class="checkmark">✓</span><span>24/7 front desk support</span></div>
           </div>
         </div>
+        </div>
       </div>
     </section>
 
@@ -824,7 +835,10 @@
             Explore local attractions, scenic spots, golfing options, fishing access, dining, and convenient places to visit during your stay.
           </p>
         </div>
-        <div class="explore-grid" aria-label="Swipe through nearby attractions">
+        <div class="explore-scroll-wrap">
+          <span class="explore-swipe-hint">Swipe</span>
+          <button class="explore-next" type="button" aria-label="Scroll to next attraction">→</button>
+          <div class="explore-grid" aria-label="Swipe through nearby attractions">
           <article class="room-card">
             <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1000&q=80" alt="Downtown Napanee" />
             <div class="room-content">
@@ -1047,5 +1061,19 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var nextBtn = document.querySelector('.explore-next');
+      var grid = document.querySelector('.explore-grid');
+
+      if (nextBtn && grid) {
+        nextBtn.addEventListener('click', function () {
+          var card = grid.querySelector('.room-card');
+          var scrollAmount = card ? card.offsetWidth + 16 : grid.clientWidth;
+          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
