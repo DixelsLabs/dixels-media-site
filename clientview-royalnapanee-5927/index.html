@@ -469,11 +469,17 @@
 
       .date-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 10px;
       }
 
       .date-grid .field {
         margin-bottom: 0;
+        padding: 12px;
+      }
+
+      .date-grid .field input {
+        padding: 12px 10px;
+        font-size: 15px;
       }
 
       .stat {
@@ -519,7 +525,8 @@
         gap: 16px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 6px;
+        padding-bottom: 18px;
+        position: relative;
       }
 
       .explore-grid .room-card {
@@ -528,8 +535,43 @@
         scroll-snap-align: start;
       }
 
+      .explore-grid::after {
+        content: "●  ●  ●  ●";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        letter-spacing: 6px;
+        color: #7ea18b;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
       .explore-grid::-webkit-scrollbar {
         height: 8px;
+      }
+
+      #location-feature .two-col,
+      #contact .two-col {
+        display: flex !important;
+        flex-direction: column;
+      }
+
+      #location-feature .two-col > .panel:last-child {
+        order: 1;
+      }
+
+      #location-feature .two-col > .panel:first-child {
+        order: 2;
+      }
+
+      #contact .two-col > .panel:first-child {
+        order: 1;
+      }
+
+      #contact .two-col > .panel:last-child {
+        order: 2;
       }
     }
 
@@ -735,7 +777,7 @@
             Explore local attractions, scenic spots, golfing options, fishing access, dining, and convenient places to visit during your stay.
           </p>
         </div>
-        <div class="explore-grid">
+        <div class="explore-grid" aria-label="Swipe through nearby attractions">
           <article class="room-card">
             <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1000&q=80" alt="Downtown Napanee" />
             <div class="room-content">
