@@ -550,15 +550,18 @@
         min-width: 100%;
         flex: 0 0 100%;
         scroll-snap-align: start;
-        animation: mobileExploreScroll 16s infinite;
       }
 
-      @keyframes mobileExploreScroll {
-        0%, 20% { transform: translateX(0); }
-        25%, 45% { transform: translateX(calc(-100% - 16px)); }
-        50%, 70% { transform: translateX(calc(-200% - 32px)); }
-        75%, 95% { transform: translateX(calc(-300% - 48px)); }
-        100% { transform: translateX(0); }
+      .explore-grid::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: calc(100% - 6px);
+        background: linear-gradient(to left, #f9fcfa 10%, rgba(249,252,250,0));
+        pointer-events: none;
+        z-index: 2;
       }
 
       .explore-grid::-webkit-scrollbar {
