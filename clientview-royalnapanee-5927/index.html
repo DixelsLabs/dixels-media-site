@@ -469,17 +469,18 @@
 
       .date-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        gap: 8px;
       }
 
       .date-grid .field {
         margin-bottom: 0;
-        padding: 12px;
+        padding: 10px;
+        width: 100%;
       }
 
       .date-grid .field input {
-        padding: 12px 10px;
-        font-size: 15px;
+        padding: 12px 8px;
+        font-size: 14px;
       }
 
       .stat {
@@ -535,17 +536,29 @@
         scroll-snap-align: start;
       }
 
-      .explore-grid::after {
-        content: "●  ●  ●  ●";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 10px;
-        letter-spacing: 6px;
-        color: #7ea18b;
-        pointer-events: none;
-        white-space: nowrap;
+      .explore-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+        position: relative;
+      }
+
+      .explore-grid .room-card {
+        min-width: 100%;
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        animation: mobileExploreScroll 16s infinite;
+      }
+
+      @keyframes mobileExploreScroll {
+        0%, 20% { transform: translateX(0); }
+        25%, 45% { transform: translateX(calc(-100% - 16px)); }
+        50%, 70% { transform: translateX(calc(-200% - 32px)); }
+        75%, 95% { transform: translateX(calc(-300% - 48px)); }
+        100% { transform: translateX(0); }
       }
 
       .explore-grid::-webkit-scrollbar {
@@ -568,10 +581,17 @@
 
       #contact .two-col > .panel:first-child {
         order: 1;
+        width: 100%;
       }
 
       #contact .two-col > .panel:last-child {
         order: 2;
+        width: 100%;
+      }
+
+      #contact .two-col > .panel:last-child {
+        padding-left: 20px;
+        padding-right: 20px;
       }
     }
 
